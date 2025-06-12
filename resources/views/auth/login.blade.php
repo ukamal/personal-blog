@@ -74,7 +74,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>admin@gmail.com</td>
+									<td>ka@gmail.com</td>
 									<td>12345678</td>
 									<td>Admin</td>
 								</tr>

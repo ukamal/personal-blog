@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use Image;
+use App\Models\User;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -16,26 +19,64 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+
+        // return view('profile.edit', [
+        //     'user' => $request->user(),
+        // ]);
+        $id = Auth::user()->id;
+        $userData = User::find($id);
+        return view('frontend.layouts.profile.profile',compact('userData'));
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+    // public function update(ProfileUpdateRequest $request, $id): RedirectResponse
+    // {
+    //     dd($id);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+    //     $request->user()->fill($request->validated());
+
+    //     if ($request->user()->isDirty('email')) {
+    //         $request->user()->email_verified_at = null;
+    //     }
+
+    //     $request->user()->save();
+
+    //     return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    // }
+
+
+    public function update(Request $request, $id){
+        // dd($request->all());
+
+        $validateData = $request->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+
+        $userData = User::findOrFail($id);
+        $userData->name = $request->name;
+        $userData->description = $request->description;
+
+        if($request->hasFile('image')){
+            if($userData->image && File::exists(public_path($userData->image))){
+                File::delete(public_path($userData->image));
+            }
+        
+            $image = $request->file('image');
+            $filename = time() .'.'. $image->getClientOriginalExtension();
+            $path = public_path('backend/assets/images/' . $filename);
+            Image::make($image)->fit(300,300)->save($path);
+            $userData->image = 'backend/assets/images/' . $filename;
         }
 
-        $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+
+        $userData->save();
+        return redirect()->back();
     }
+    
 
     /**
      * Delete the user's account.
