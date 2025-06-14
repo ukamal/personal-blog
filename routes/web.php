@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/password-change', [ProfileController::class, 'PasswordChange'])->name('password-change');
+    Route::post('/password-update', [ProfileController::class, 'UpdatePassword'])->name('update-password');
 });
 
 require __DIR__.'/auth.php';

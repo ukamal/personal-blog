@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
@@ -98,4 +99,41 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function PasswordChange(){
+        // dd('ok');
+        return view('backend.admin.password-change');
+    }
+
+    public function UpdatePassword(Request $request){
+        // dd('ok');
+        $request->validate([
+            'oldpassword' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        $hashPassword = Auth::user()->password;
+        if(Hash::check($request->oldpassword, $hashPassword)){
+            $user = Auth::user();
+            $user->password = bcrypt($request->new_password);
+            $user->save();
+
+            Auth::logout(); // log out the user
+
+            $notification = array(
+                'message' => 'Password changed successfully! Please login again.',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('login')->with($notification);
+        } else {
+            return back()->with([
+                'message' => 'Oops! The current password is incorrect.',
+                'alert-type' => 'error'
+            ]);
+        }
+
+    }
+
+
 }
