@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocialController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/password-change', [ProfileController::class, 'PasswordChange'])->name('password-change');
     Route::post('/password-update', [ProfileController::class, 'UpdatePassword'])->name('update-password');
+
+    Route::controller(SocialController::class)->prefix('social')->group(function(){
+        Route::get('/view','view')->name('view_social');
+        Route::get('/add','add')->name('add_social');
+    });
+
 });
 
 require __DIR__.'/auth.php';
