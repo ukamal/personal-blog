@@ -30,7 +30,10 @@
             </div>
             <!--end breadcrumb-->
             <h6 class="mb-0 text-uppercase">
-                  <a href="{{ route('add_social') }}">Add Social</a>
+                  @if ($countSocial < 1)
+                          <a href="{{ route('add_social') }}">Add Social</a>
+                  @endif
+                
             </h6>
             <hr/>
             <div class="card">
@@ -39,23 +42,26 @@
                               <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                           <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>Facebook</th>
+                                                <th>Twitter</th>
+                                                <th>Linkedin</th>
+                                                <th>Youtube</th>
+                                                <th>Action</th>
                                           </tr>
                                     </thead>
                                     <tbody>
+                                          @foreach ($allData as $item)
                                           <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
+                                                <td>{{ $item->facebook }}</td>
+                                                <td>{{ $item->twitter }}</td>
+                                                <td>{{ $item->linkedin }}</td>
+                                                <td>{{ $item->youtube }}</td>
+                                                <td>
+                                                      <a href="{{ route('edit_social',$item->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                                      <a href="{{ route('delete_social',$item->id) }}" id="delete" class="btn btn-danger btn-sm" >Delete</a>
+                                                </td>
                                           </tr>
+                                          @endforeach
                                     
                                     </tbody>
                                  

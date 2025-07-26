@@ -35,6 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::controller(SocialController::class)->prefix('social')->group(function(){
         Route::get('/view','view')->name('view_social');
         Route::get('/add','add')->name('add_social');
+        Route::post('/store','store')->name('social_store');
+        Route::get('/edit/{id}','edit')->name('edit_social');
+        Route::post('/update/{id}','update')->name('social_update');
+        Route::get('/delete/{id}','deleteSocial')->name('delete_social');
     });
 
 });
