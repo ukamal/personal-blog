@@ -30,6 +30,7 @@
                      </li>
                   </ul>
                </li>
+
                <li>
                   <a href="javascript:;" class="has-arrow">
                      <div class="parent-icon"><i class="bx bx-category"></i>
@@ -41,6 +42,36 @@
                      </li>
                   </ul>
                </li>
+
+               <li>
+                  <a href="javascript:;" class="has-arrow">
+                     <div class="parent-icon"><i class="bx bx-category"></i>
+                     </div>
+                     <div class="menu-title">Menus</div>
+                  </a>
+                  <ul>
+                     <li> 
+                        <a href="{{ route('view_menu') }}"><i class="bx bx-right-arrow-alt"></i>Menus</a>
+                     </li>
+                     <li> 
+                        <a href="{{ route('view_sub_menu') }}"><i class="bx bx-right-arrow-alt"></i>SubMenu</a>
+                     </li>
+                  </ul>
+               </li>
+
+               <li>
+                  <a href="javascript:;" class="has-arrow">
+                     <div class="parent-icon"><i class="bx bx-category"></i>
+                     </div>
+                     <div class="menu-title">Slider</div>
+                  </a>
+                  <ul>
+                     <li> 
+                        <a href="{{ route('view_slider') }}"><i class="bx bx-right-arrow-alt"></i>Slider</a>
+                     </li>
+                  </ul>
+               </li>
+
                <li class="menu-label">UI Elements</li>
               
                <li>
