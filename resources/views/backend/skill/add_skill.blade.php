@@ -31,47 +31,31 @@
             <!--end breadcrumb-->
             <hr/>
             <div class="card-body">
-                 <form action="{{ route('slider_store') }}" method="post" enctype="multipart/form-data">
+                 <form action="{{ route('skill_store') }}" method="post">
                   @csrf
 
                   <div class="form-row">
                         <div class="row">
-                              <div class="form-group col-md-3">
-                                    <label for="slider_image">Slider Image <span class="text-danger">*</span></label>
-                                    <input type="file" name="slider_image" id="image" class="form-control">
-                                    @error('slider_image')
-                                          <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                              </div>
+                      
 
-                              <div class="form-group col-md-3">
-                                    <img src="{{ url('/upload/slider_image/slider.png') }}" id="showImg" alt="slider-image" width="100px" height="100px">
-                              </div>
-
-                              <div class="form-group col-md-6">
-                                    <label for="Title">Title <span class="text-danger">*</span></label>
-                                    <input type="text" name="title" class="form-control" placeholder="Title">
-                                    @error('Title')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                              </div>
+                        <div class="form-group col-md-12">
+                              <label for="Title">Skill Name <span class="text-danger">*</span></label>
+                              <input type="text" name="name" class="form-control" placeholder="Skill Name">
+                              @error('name')
+                              <span class="text-danger">{{ $message }}</span>
+                              @enderror
+                        </div>
                         </div>
 
                        <div class="row">
-                         <div class="form-group col-md-6 mt-2">
-                              <label for="sub_title">Sub Title <span class="text-danger">*</span></label>
-                              <input type="text" name="sub_title" class="form-control" placeholder="sub_title">
-                              @error('sub_title')
+                         <div class="form-group col-md-12 mt-2">
+                              <label for="sub_title">Percentage <span class="text-danger">*</span></label>
+                              <input type="text" name="percent" class="form-control" placeholder="Percentage">
+                              @error('percent')
                                     <span class="text-danger">{{ $message }}</span>
                               @enderror
                         </div>
-                        <div class="form-group col-md-6 mt-2">
-                              <label for="Date">Date <span class="text-danger">*</span></label>
-                              <input type="date" name="slider_date" class="form-control" placceholder="Date">
-                              @error('date')
-                                    <span class="text-danger">{{ $message }}</span>
-                              @enderror
-                        </div>
+                      
                        </div>
                        <div class="row mt-4">
                         <button type="submit" class="btn btn-success form-control">Submit</button>
@@ -82,16 +66,6 @@
       </div>
 </div>
 
-<script>
-      $(document).ready(function(){
-            $('#image').change(function(e){
-                  var reader = new FileReader();
-                  reader.onload = function(e){
-                        $('#showImg').attr('src',e.target.result);
-                  }
-                  reader.readAsDataURL(e.target.files['0']);
-            });
-      });
-</script>
+
 
 @endsection

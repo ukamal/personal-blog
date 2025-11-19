@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\ProfileController;
@@ -70,6 +72,24 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}','edit')->name('edit_slider');
         Route::post('/update/{id}','update')->name('slider_update');
         Route::get('/delete/{id}','deleteSubslider')->name('delete_slider');
+    });
+
+    Route::controller(SkillController::class)->prefix('skill')->group(function(){
+        Route::get('/view','view')->name('view_skill');
+        Route::get('/add','add')->name('add_skill');
+        Route::post('/store','store')->name('skill_store');
+        Route::get('/edit/{id}','edit')->name('edit_skill');
+        Route::post('/update/{id}','update')->name('skill_update');
+        Route::get('/delete/{id}','deleteSkill')->name('delete_skill');
+    });
+
+    Route::controller(BlogController::class)->prefix('blog')->group(function(){
+        Route::get('/view','view')->name('view_blog');
+        Route::get('/add','add')->name('add_blog');
+        Route::post('/store','store')->name('store_blog');
+        Route::get('/edit/{id}','edit')->name('edit_blog');
+        Route::post('/update/{id}','update')->name('update_blog');
+        Route::get('/delete/{id}','deleteBlog')->name('delete_blog');
     });
 
 });

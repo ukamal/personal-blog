@@ -47,9 +47,7 @@
 	      @include('backend.admin.footer')
       </div>
       <!--end wrapper-->
-      <!--start switcher-->
-	      @include('backend.admin.switcher')
-      <!--end switcher-->
+
       <!-- Bootstrap JS -->
       <script src="{{ asset('backend/assets/js/bootstrap.bundle.min.js') }}"></script>
       <!--plugins-->

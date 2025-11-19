@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class user_skill extends Model
+class UserSkill extends Model
 {
     use HasFactory;
-    protected $gurded = [];
+    protected $guarded = [];
     
 }
