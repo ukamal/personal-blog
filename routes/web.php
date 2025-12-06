@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SliderController;
@@ -95,3 +96,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/show-menu/{id}', [HomeController::class, 'showMenu'])->name('showMenu');
