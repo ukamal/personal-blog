@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Menu;
+use App\Models\SubMenu;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,13 +23,7 @@ class HomeController extends Controller
                     return view('/frontend/singlepage/about');
                     break;
                 case 'Contact':
-                    return view('frontend.layouts.contact');
-                    break;
-                case 'Portfolio':
-                    return view('frontend.layouts.portfolio');
-                    break;
-                case 'Blog':
-                    return view('frontend.layouts.blog');
+                    return view('frontend.singlepage.contact');
                     break;
                 default:
                     return view('frontend.layouts.index');
@@ -35,4 +31,29 @@ class HomeController extends Controller
             }
         }
     }
+
+    public function showSubMenu($id){
+        $submenu = SubMenu::find($id);
+        // dd($submenu);
+            if($submenu){
+            switch($submenu->sub_menu_name){
+                case 'Blog 1':
+                    return view('frontend.singlepage.blog');
+                    break;
+                case 'Blog 2':
+                    return view('frontend.singlepage.blog_detail');
+                    break;
+                default:
+                    return view('frontend.layouts.index');
+                    break;
+            }
+        }
+    }
+
+    public function blogDetails($slug){
+        // dd($id);
+        $details = Blog::where('slug', $slug)->firstOrFail();
+        return view('frontend.singlepage.blog_detail',compact('details'));
+    }
+
 }

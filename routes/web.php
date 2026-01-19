@@ -1,14 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SocialController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubMenuController;
+use App\Http\Controllers\SubscribeController;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -98,3 +102,27 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/show-menu/{id}', [HomeController::class, 'showMenu'])->name('showMenu');
+
+Route::get('/show-submenu/{id}', [HomeController::class, 'showSubMenu'])->name('showSubMenu');
+Route::get('/blog-details/{slug}', [HomeController::class, 'blogDetails'])->name('blog.details');
+Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
+
+Route::get('/view-subscriber', [SubscribeController::class, 'viewSubscriber'])->name('view_subscriber');
+
+Route::controller(ContactController::class)->prefix('contact')->group(function(){
+    Route::post('/store-contact','contact')->name('contact');
+    Route::get('/view-contact','view')->name('view_contact');
+    Route::get('/edit/{id}','edit')->name('edit_contact');
+    Route::post('/update/{id}','update')->name('update_contact');
+    Route::get('/delete/{id}','deletecontact')->name('delete_contact');
+});
+
+Route::controller(CommentController::class )->prefix('comment')->group(function(){
+    Route::get('/view','view')->name('view_comment_list');
+    Route::get('/edit/{id}','edit')->name('edit_comment');
+    Route::post('/store','store')->name('comment.store');
+
+    Route::get('/status/{id}','status')->name('status');
+
+    Route::get('/delete/{id}','deleteComment')->name('delete_comment');
+});

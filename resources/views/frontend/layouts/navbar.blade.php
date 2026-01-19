@@ -16,7 +16,7 @@
                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                <div class="dropdown-menu">
                   @foreach ($submenus as $sub)
-                     <a href="blog.html" class="dropdown-item">{{ $sub->sub_menu_name }}</a>
+                     <a href="{{ route('showSubMenu',$sub->id ) }}" class="dropdown-item">{{ $sub->sub_menu_name }}</a>
                   @endforeach
           
                </div>

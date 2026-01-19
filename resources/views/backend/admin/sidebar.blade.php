@@ -83,6 +83,20 @@
                   </ul>
                </li>
 
+               <li>
+                  <a href="javascript:;" class="has-arrow">
+                     <div class="parent-icon"><i class="bx bx-category"></i>
+                     </div>
+                     <div class="menu-title">Comment List</div>
+                  </a>
+                  <ul>
+                     <li> 
+                        <a href="{{ route('view_comment_list') }}"><i class="bx bx-right-arrow-alt"></i>View Comment List</a>
+                     </li>
+                  </ul>
+               </li>
+
+
 
             </ul>
             <!--end navigation-->

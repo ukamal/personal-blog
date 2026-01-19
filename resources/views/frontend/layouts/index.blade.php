@@ -49,7 +49,7 @@
          <p>
            {{ $blog->long_desc }}
          </p>
-         <a class="btn btn-link p-0" href="">Read More <i class="fa fa-angle-right"></i></a>
+         <a class="btn btn-link p-0" href="{{ route('blog.details', $blog->slug) }}">Read More <i class="fa fa-angle-right"></i></a>
       </div>
    </div>
    @endforeach
@@ -62,14 +62,18 @@
 <div class="container py-5 px-4 bg-secondary text-center">
    <h1 class="text-white font-weight-bold">Subscribe My Newsletter</h1>
    <p class="text-white">Subscribe and get my latest article in your inbox</p>
-   <form class="form-inline justify-content-center">
+   <form class="form-inline justify-content-center" action="{{ route('subscribe') }}" method="post">
+      @csrf
       <div class="input-group">
-         <input type="text" class="form-control" placeholder="Your Email">
+         <input type="text" class="form-control" placeholder="Your Email" name="email" id="email">
          <div class="input-group-append">
             <button class="btn btn-primary" type="submit">Subscribe</button>
          </div>
       </div>
    </form>
+   @error('email')
+      <span class="text-danger">{{ $message}}</span>
+   @enderror
 </div>
 <!-- Subscribe End -->
 
